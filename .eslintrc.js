@@ -7,16 +7,13 @@ module.exports = {
   parserOptions: {
   },
   extends: [
-    '@noliaki/eslint-config-typescript-prettier',
     '@nuxtjs/eslint-config-typescript',
     '@nuxtjs',
-    'prettier',
     'prettier/vue',
-    'plugin:prettier/recommended',
+    '@noliaki/eslint-config-typescript-prettier',
     'plugin:nuxt/recommended'
   ],
   plugins: [
-    'prettier'
   ],
   // add your custom rules here
   rules: {
