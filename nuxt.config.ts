@@ -1,7 +1,6 @@
-import { Configuration } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types'
 
-const config: Configuration = {
-  mode: 'universal',
+const config: NuxtConfig = {
   /*
    ** Headers of the page
    */
@@ -13,10 +12,10 @@ const config: Configuration = {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
@@ -36,7 +35,7 @@ const config: Configuration = {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxt/typescript-build'
+    '@nuxt/typescript-build',
   ],
   /*
    ** Nuxt.js modules
@@ -44,7 +43,7 @@ const config: Configuration = {
   modules: [
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
   ],
   /*
    ** Build configuration
@@ -53,12 +52,25 @@ const config: Configuration = {
     /*
      ** You can extend webpack config here
      */
-    extend(_config, _ctx) {}
+    terser: {
+      parallel: true,
+      cache: false,
+      sourceMap: false,
+      extractComments: true,
+      terserOptions: {
+        output: {
+          comments: /^\**!|@preserve|@license|@cc_on/,
+        },
+        compress: {
+          drop_console: process.env.NODE_ENV === 'production',
+        },
+      },
+    },
   },
   srcDir: 'src',
   router: {
-    base: '/'
-  }
+    base: '/',
+  },
 }
 
 export default config
